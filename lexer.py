@@ -1,5 +1,13 @@
 import re
 
+class Operand: 
+	def __init__(self):
+		pass
+
+class Bracket: 	
+	def __init__(self):
+		pass
+
 class NoMatch:
 	def __init__(self):
 		self.group = lambda n : None
@@ -24,25 +32,25 @@ class Rule:
 		return eval(str(self.value))
 			 	
 	
-class Left_Bracket(Rule):
+class Left_Bracket(Rule, Bracket):
 	r'\('
 
-class Right_Bracket(Rule):
+class Right_Bracket(Rule, Bracket):
 	r'\)'
 	
-class Assignment(Rule):
+class Assignment(Rule, Operand):
 	r'='	
 	
-class Add(Rule):
+class Add(Rule, Operand):
 	r'\+'
 
-class Subtraction(Rule):
+class Subtraction(Rule, Operand):
 	r'\-'
 
-class Multiplication(Rule):
+class Multiplication(Rule, Operand):
 	r'\*'
 
-class Division(Rule):
+class Division(Rule, Operand):
 	r'\/'
 	
 class Number(Rule):
@@ -50,6 +58,9 @@ class Number(Rule):
 
 class Identifier(Rule):
 	r'[a-zA-Z][a-zA-Z0-9_]+'
+
+class Whitespace(Rule):
+	r'[ \n\t]+'
 	
 	
 class Operation:
