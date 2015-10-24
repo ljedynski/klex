@@ -22,5 +22,5 @@ def test_Addition_value():
 	Addition.Match('+')
 	testadd = Operation(n1, Addition, n2)
 	assert testadd .Eval()== 225
-	
+	assert not testadd .Eval()== 2251
 	

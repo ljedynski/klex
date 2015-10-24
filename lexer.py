@@ -10,7 +10,6 @@ class Rule:
 		self._process()
 		self.value = None
 		
-	
 	def _process(self):
 		self.pattern = re.compile(self.__doc__)
 		
@@ -36,6 +35,15 @@ class Assignment(Rule):
 	
 class Add(Rule):
 	r'\+'
+
+class Subtraction(Rule):
+	r'\-'
+
+class Multiplication(Rule):
+	r'\*'
+
+class Division(Rule):
+	r'\/'
 	
 class Number(Rule):
 	r'[0-9]+\.?[0-9]+'
@@ -45,13 +53,14 @@ class Identifier(Rule):
 	
 	
 class Operation:
-	def __init__(self, left, operator, right):
+	def __init__(self, left, mid, right):
 		self.left = left
 		self.right = right
-		self.operator = operator
+		self.mid = mid
 
 	def Eval(self):
-		return eval(self.left.value+self.operator.value+self.right.value)
+		self.value = eval(self.left.value+self.mid.value+self.right.value)
+		return self.value
 	
 
 
