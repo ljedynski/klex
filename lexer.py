@@ -1,11 +1,9 @@
 import re
-import sys 
 
 class Rule:
 	r''
 	def __init__(self):
 		self._process()
-		self._interpreter = True
 	
 	def _process(self):
 		self.pattern = re.compile(self.__doc__)
@@ -15,15 +13,9 @@ class Rule:
 		return self.pattern.match(data)
 	
 	def Eval(self):
-		if self._interpreter:
-			if isinstance(self._data, int):
-				return self._data		
-			return eval(str(self._data))
-		else:
-			return self._data
+		self_data = eval(self._data)
 			 	
 	
-
 class Left_Bracket(Rule):
 	r'\('
 
@@ -38,13 +30,18 @@ class Number(Rule):
 
 class Identifier(Rule):
 	r'[a-zA-Z][a-zA-Z0-9_]+'
+	
+class Addition(Rule):
+	r'\+'
+	def __init__(self, left, right)
+		self.left = left
+		self.right = right
+		super(Addition, self).__init__()
+	
+	def Eval(self):
+		self._data = eval(str(self.left._data)+self.)
 
-class Operand(Rule):
-	def __init__(self, _type, left, right):
-		pass
-		
 
-		
 		
 		
 
