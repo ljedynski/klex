@@ -8,7 +8,7 @@ class lexerError(Exception):
 		return self.value
 
 rulesdb=(
-	(r'[ \n\t]+' , (None, )),
+	(r'[ \n\t\s]+' , (None, )),
 	(r'\+', ('ADD', '+')),
 	(r'\-', ('SUB', '-')),
 	(r'\*', ('MUL', '*')),
@@ -16,14 +16,16 @@ rulesdb=(
 	(r'\==', ('EQU', '==')),
 	(r'\<\=', ('LEQ', '<=')),
 	(r'\>\=', ('GEQ', '>=')),
+		(r'\=' , ('SET',)),
 	(r'\;', ('SCL', ';')),
 	(r'\>', ('GT', '>')),
 	(r'\<', ('LT', '<')),	
 	(r'\(' , ('LBR', '(')),
 	(r'\)' , ('RBR', ')')),
+	(r'[0-9]+' , ('NUM',)),
 	(r'[a-zA-Z][a-zA-Z0-9_]+' , ('ID',)),
-	(r'[0-9]+\.?[0-9]+' , ('NUM',)),
-	(r'\=' , ('SET',)),
+	(r'[a-zA-Z]', ('ID',)),
+
 )
 
 
@@ -42,9 +44,10 @@ def lexer(source):
 					print(pattern)
 				break
 		if not match:
-			raise lexerError("Invalid character at pos %d" % pos)
-			sys.exit(1)
+			sys.exit(0)
 		else:
 			pos = match.end(0)
 	return tokens
+	
+
 
