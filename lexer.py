@@ -40,8 +40,8 @@ def lexer(source):
 			match = token.match(source, pos)
 			if match:
 				if data[0] != None:
-					tokens.append((data[0], match.group(0), pos))
-					print(pattern)
+					tokens.append((match.group(0), data))
+					
 				break
 		if not match:
 			sys.exit(0)
